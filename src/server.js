@@ -4,7 +4,9 @@ const express = require("express");
 const {register, login} = require("./controllers/auth.controller")
 
 
-const connect = require("./configs/db")
+const connect = require("./configs/db");
+
+const PORT = process.env.SERVER_PORT || 8080;
 
 const app = express();
 
@@ -19,7 +21,7 @@ app.post("/register", register);
 app.post("/login", login);
 
 
-app.listen(process.env.SERVER_PORT, async function (){
+app.listen(PORT, async function (){
     await connect();
-    console.log(`listening on port ${process.env.SERVER_PORT}`);
+    console.log(`listening on port ${PORT}`);
 })
