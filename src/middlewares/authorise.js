@@ -4,9 +4,9 @@ const authorise = (permittedRoles) => async function (req, res, next) {
 
     const roles = user.roles;
 
-    const is_permitted = permittedRoles.filter(role => roles.includes(role));
+    // const is_permitted = permittedRoles.filter(role => roles.includes(role));
 
-    if(is_permitted.length > 0) {  
+    if(permittedRoles === roles ){
         next();
     } else {
         return res.status(403).send({status: "failed", message: "Permission denied"});
