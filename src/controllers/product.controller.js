@@ -20,7 +20,8 @@ const router = express.Router();
 // })
 
 
-router.post("",authenticate, authorise(["admin"]), async (req, res) => {
+
+router.post("",authenticate, authorise("admin"), async (req, res) => {
     try{
         const product = await Product.create(req.body)
         return res.status(200).send(product)
@@ -31,7 +32,7 @@ router.post("",authenticate, authorise(["admin"]), async (req, res) => {
 })
 
 
-router.get("", authenticate, authorise(["admin", "VENDOR"]), async (req, res) => {
+router.get("", authenticate, authorise( "vendor"), async (req, res) => {
   
     try{
         const product = await Product.find().lean().exec();
@@ -41,7 +42,7 @@ router.get("", authenticate, authorise(["admin", "VENDOR"]), async (req, res) =>
         return res.status(500).send({message :error.message})
     }
 });
-router.delete("/:id", authenticate, authorise(["admin", "VENDOR"]), async (req, res) => {
+router.delete("/:id", authenticate, authorise("admin"), async (req, res) => {
   
     try {
         const product = await Product.findByIdAndDelete(req.params.id).lean().exec();
@@ -51,7 +52,7 @@ router.delete("/:id", authenticate, authorise(["admin", "VENDOR"]), async (req, 
         return res.status(500).send(error.message);
       }
 });
-router.get('/:id', authenticate, authorise(["admin", "VENDOR"]), async(req, res) => {
+router.get('/:id', authenticate, authorise("vendor"), async(req, res) => {
     try{
         const product = await Product.findById(req.params.id).lean().exec()
         return res.status(200).send(product)

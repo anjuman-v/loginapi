@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
     last_name: {type: String, required: false},
     email: {type: String, required: true},
     password: {type: String, required: true},
-    roles: [{type: String, required: false}]  // Like "roles" : ["ADMIN", "VENDOR"]
+    roles: {type: String, required: false} // Like "roles" : ["ADMIN", "VENDOR"]
 }, {
     versionKey: false,
     timestamps: true
